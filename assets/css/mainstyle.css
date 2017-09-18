@@ -1,0 +1,54 @@
+#heading {
+    cursor: pointer;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding-right: 8px;
+}
+
+.hiddenheading {
+    display: none;
+}
+a[data-command='p'],
+a[data-command='h1'],
+a[data-command='h2'],
+a[data-command='h3'],
+a[data-command='h4'],
+a[data-command='h5'],
+a[data-command='h6'],
+a[data-command='insertimage'],
+a[data-command='undo'],
+a[data-command='redo'],
+a[data-command='bold'],
+a[data-command='italic'],
+a[data-command='underline'],
+a[data-command='strikeThrough'],
+a[data-command='justifyLeft'],
+a[data-command='justifyCenter'],
+a[data-command='justifyRight'],
+a[data-command='justifyFull'],
+a[data-command='quote'],
+a[data-command='insertUnorderedList'],
+a[data-command='insertOrderedList'],
+a[data-command='createlink'],
+a[data-command='unlink'],
+a[data-command='subscript'],
+a[data-command='superscript'] {
+    color: #000;
+    padding-right: 8px;
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+span a {
+    font-size: 0.8rem;
+}
+
+span a:nth-of-type(odd) {
+    border-right: 1px solid #9D9D9D;
+}
+
+#counter {
+    height: 400px;
+    overflow-y: auto;
+}
