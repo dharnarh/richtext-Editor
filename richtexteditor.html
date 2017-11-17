@@ -11,7 +11,13 @@
     <link rel="stylesheet" type="text/css" href="assets/css/mainstyle.css" />
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <style>
-        
+        div.code-container {
+            background-color: #f7f7fa;
+            width:100%;
+        }
+        span#menu-selector {
+            transition: width 5s;
+        }        
     </style>
 </head>
 
@@ -25,66 +31,77 @@
         <div class="card">
             <div class="card-header">
                 <span class="toolbar">
-                    <span id="heading" class="fa fa-plus"> Heading</span>
+                    <span id="menu-selector" class="fa fa-plus"> Headings</span>
                     <span class="hiddenheading">
-                    <a href="#" data-command='p'>Paragraph</a>
-                    <a href="#" data-command='h1'>H1</a>
-                    <a href="#" data-command='h2'>H2</a>
-                    <a href="#" data-command='h3'>H3</a>
-                    <a href="#" data-command='h4'>H4</a>
-                    <a href="#" data-command='h5'>H5</a>
-                    <a href="#" data-command='h6'>H6</a>
+                        <a href="#" data-command='p'>Paragraph</a>
+                        <a href="#" data-command='h1'>H1</a>
+                        <a href="#" data-command='h2'>H2</a>
+                        <a href="#" data-command='h3'>H3</a>
+                        <a href="#" data-command='h4'>H4</a>
+                        <a href="#" data-command='h5'>H5</a>
+                        <a href="#" data-command='h6'>H6</a>
                     </span>
                     <span class="hidethem">
-                    <a href="#" data-command='insertimage'><i class='fa fa-image'></i></a>
-                    <a href="#" data-command='undo'><i class='fa fa-undo'></i></a>
-                    <a href="#" data-command='redo'><i class='fa fa-repeat'></i></a>
-                    <a href="#" data-command='bold'><i class='fa fa-bold'></i></a>
-                    <a href="#" data-command='italic'><i class='fa fa-italic'></i></a>
-                    <a href="#" data-command='underline'><i class='fa fa-underline'></i></a>
-                    <a href="#" data-command='strikeThrough'><i class='fa fa-strikethrough'></i></a>
-                    <a href="#" data-command='justifyLeft'><i class='fa fa-align-left'></i></a>
-                    <a href="#" data-command='justifyRight'><i class='fa fa-align-right'></i></a>
-                    <a href="#" data-command='justifyCenter'><i class='fa fa-align-center'></i></a>
-                    <a href="#" data-command='justifyFull'><i class='fa fa-align-justify'></i></a>
-                    <a href="#" data-command='quote'><i class='fa fa-quote-left'></i></a>
-                    <a href="#" data-command='insertUnorderedList'><i class='fa fa-list-ul'></i></a>
-                    <a href="#" data-command='insertOrderedList'><i class='fa fa-list-ol'></i></a>
-                    <a href="#" data-command='createlink'><i class='fa fa-link'></i></a>
-                    <a href="#" data-command='unlink'><i class='fa fa-unlink'></i></a>
-                    <a href="#" data-command='subscript'><i class='fa fa-subscript'></i></a>
-                    <a href="#" data-command='superscript'><i class='fa fa-superscript'></i></a>
+                        <a href="#" data-command='insertimage'><i class='fa fa-image'></i></a>
+                        <a href="#" data-command='undo'><i class='fa fa-undo'></i></a>
+                        <a href="#" data-command='redo'><i class='fa fa-repeat'></i></a>
+                        <a href="#" data-command='bold'><i class='fa fa-bold'></i></a>
+                        <a href="#" data-command='italic'><i class='fa fa-italic'></i></a>
+                        <a href="#" data-command='underline'><i class='fa fa-underline'></i></a>
+                        <a href="#" data-command='strikeThrough'><i class='fa fa-strikethrough'></i></a>
+                        <a href="#" data-command='justifyLeft'><i class='fa fa-align-left'></i></a>
+                        <a href="#" data-command='justifyRight'><i class='fa fa-align-right'></i></a>
+                        <a href="#" data-command='justifyCenter'><i class='fa fa-align-center'></i></a>
+                        <a href="#" data-command='justifyFull'><i class='fa fa-align-justify'></i></a>
+                        <a href="#" data-command='quote'><i class='fa fa-quote-left'></i></a>
+                        <a href="#" data-command='insertUnorderedList'><i class='fa fa-list-ul'></i></a>
+                        <a href="#" data-command='insertOrderedList'><i class='fa fa-list-ol'></i></a>
+                        <a href="#" data-command='createlink'><i class='fa fa-link'></i></a>
+                        <a href="#" data-command='unlink'><i class='fa fa-unlink'></i></a>
+                        <a href="#" data-command='subscript'><i class='fa fa-subscript'></i></a>
+                        <a href="#" data-command='superscript'><i class='fa fa-superscript'></i></a>
                     </span>
                 </span>
             </div>
             <div id="counter" class="card-body" contenteditable="true"></div>
-            <div class="card-footer">
-                <small>Word counter: <span id="count"></span></small>
-            </div>
+            <div id="card-body"><small>Word counter: <span id="count"></span></small></div>
+            <div id="card" class="code-container"><code id="export"></code></div>
         </div>
     </div>
 
     <script>
         $('.toolbar a').click(function () {
             var command = $(this).data('command');
-            if(command== 'p' || command == 'h1' || command == 'h2' || command == 'h3' || command == 'h4' || command == 'h5' || command == 'h6') {
+            if(command== 'p' || command == 'h1' || command == 'h2' || command == 'h3' || command == 'h4' || command == 'h5' || command == 'h6')
                 document.execCommand('formatBlock', false, command);
-            }
+            
             if (command == 'createlink' || command == 'insertimage') {
                 url = prompt('Enter the link here: ', 'http:\/\/');
                 document.execCommand($(this).data('command'), false, url);
-            } else document.execCommand($(this).data('command'), false, null);
+            } else 
+                document.execCommand($(this).data('command'), false, null);
         });
-        $('#heading').click(function () {
+        $('#menu-selector').click(function () {
+            // replace menu
             $('.hidethem').toggle();
             $('.hiddenheading').toggle();
+
+            // replace label
+            $(this).html($(this).html() == ' Formatting' ? ' Headings' : ' Formatting');
         });
-        
+
         $('#counter').on('input', function () {
+            // update wordcount
             var text = this.textContent,
             count = text.trim().replace(/\s+/g, ' ').split(' ').length;
             $('#count').text(count);
-        })
+
+            // update html
+            $('#export').text($(this).html());
+        });
+
+
     </script>
 </body>
 </html>
+

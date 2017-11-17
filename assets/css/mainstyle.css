@@ -1,9 +1,10 @@
-#heading {
+span#menu-selector {
     cursor: pointer;
     padding: 8px;
     background-color: #fff;
     border-radius: 4px;
     padding-right: 8px;
+	margin-right: 5px;
 }
 
 .hiddenheading {
@@ -52,3 +53,5 @@ span a:nth-of-type(odd) {
     height: 400px;
     overflow-y: auto;
 }
+
+
